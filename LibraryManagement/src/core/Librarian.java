@@ -9,6 +9,6 @@ package core;
  *
  * @author vothimaihoa
  */
-public class Librarian {
+public class Librarian extends User {
         
 }
