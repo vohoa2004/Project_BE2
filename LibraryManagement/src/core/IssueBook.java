@@ -9,6 +9,6 @@ package core;
  *
  * @author vothimaihoa
  */
-public class IssueBook extends Book{
+public class IssueBook extends Book {
         
 }
