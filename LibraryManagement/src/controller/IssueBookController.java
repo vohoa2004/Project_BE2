@@ -3,14 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view;
+package controller;
+
+import java.util.ArrayList;
+import model.IssueBook;
 
 /**
  *
  * @author vothimaihoa
  */
-public class Tester {
-        public static void main(String[] args) {
-            System.out.println("Hello!");
-    }
+public class IssueBookController {
+        
 }

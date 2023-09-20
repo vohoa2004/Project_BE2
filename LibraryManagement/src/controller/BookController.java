@@ -3,14 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package core;
+package controller;
 
 import java.util.ArrayList;
+import model.Book;
 
 /**
  *
  * @author vothimaihoa
  */
-public class LibrarianList extends ArrayList<Librarian>{
+public class BookController {
         
 }

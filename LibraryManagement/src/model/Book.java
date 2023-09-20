@@ -3,24 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package core;
+package model;
 
 /**
  *
  * @author vothimaihoa
  */
 public class Book {
-         // fields
+    // fields
+
     private int id;
     private String title;
     private String author;
     private double price;
     private String category;
     private int totalAvailable;
-    private int borrowDuration;
-
+    private int borrowDuration; // so ngay toi da duoc phep muon loai sach nay
+    
     // Constructor
-
     public Book() {
     }
 
@@ -34,60 +34,56 @@ public class Book {
         this.borrowDuration = borrowDuration;
     }
 
-    // Getter
-
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public String getAuthor() {
-        return author;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public int getTotalAvailable() {
-        return totalAvailable;
-    }
-
-    public int getBorrowDuration() {
-        return borrowDuration;
-    }
-
-    // Setter
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getAuthor() {
+        return author;
     }
 
     public void setAuthor(String author) {
         this.author = author;
     }
 
+    public double getPrice() {
+        return price;
+    }
+
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public String getCategory() {
+        return category;
     }
 
     public void setCategory(String category) {
         this.category = category;
     }
 
+    public int getTotalAvailable() {
+        return totalAvailable;
+    }
+
     public void setTotalAvailable(int totalAvailable) {
         this.totalAvailable = totalAvailable;
+    }
+
+    public int getBorrowDuration() {
+        return borrowDuration;
     }
 
     public void setBorrowDuration(int borrowDuration) {
@@ -95,18 +91,17 @@ public class Book {
     }
 
     // toString()
-
     @Override
     public String toString() {
-        return "Book{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", author='" + author + '\'' +
-                ", price=" + price +
-                ", category='" + category + '\'' +
-                ", totalAvailable=" + totalAvailable +
-                ", borrowDuration=" + borrowDuration +
-                '}';
+        return "Book{"
+                + "id=" + id
+                + ", title='" + title + '\''
+                + ", author='" + author + '\''
+                + ", price=" + price
+                + ", category='" + category + '\''
+                + ", totalAvailable=" + totalAvailable
+                + ", borrowDuration=" + borrowDuration
+                + '}';
     }
 
 }
