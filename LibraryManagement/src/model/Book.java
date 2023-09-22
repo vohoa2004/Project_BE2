@@ -33,6 +33,15 @@ public class Book {
         this.totalAvailable = totalAvailable;
         this.borrowDuration = borrowDuration;
     }
+
+    public Book(String title, String author, double price, String category, int totalAvailable, int borrowDuration) {
+        this.title = title;
+        this.author = author;
+        this.price = price;
+        this.category = category;
+        this.totalAvailable = totalAvailable;
+        this.borrowDuration = borrowDuration;
+    }
     
     
 

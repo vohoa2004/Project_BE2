@@ -21,9 +21,7 @@ public class MyUtils {
             if (!value.isEmpty()) {
                 return value;
             }
-            else {
-                return null;
-            }
+            System.out.println("Value can not be empty!");
         } while (true);
     }
 
@@ -59,28 +57,26 @@ public class MyUtils {
         } while (true);
     }
     
-    public static LocalDate inputLocalDate(String message) {
-        Scanner sc = new Scanner(System.in);
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        do {
-            System.out.print(message);
-            String dateStr = sc.nextLine();
-
-            if (dateStr.trim().isEmpty()) {
-                System.out.println("value must be filled!");
-            } else {
-                try {
-                    LocalDate date = LocalDate.parse(dateStr, dateFormatter);
-                    return date;
-                } catch (java.time.format.DateTimeParseException ex) {
-                    System.out.println("Invalid date format. Please enter date in format 'dd-MM-yyyy'.");
-                }
-            }
-        } while (true);
+    
+    public static Double inputBookDouble(String message, int min){
+       Scanner sc = new Scanner(System.in);
+       do{
+           try {
+               System.out.print(message);
+               Double number = Double.parseDouble(sc.nextLine());
+               if(number > min){
+                   return number;
+               }
+               //else
+               System.out.print("Value must be greater than " + min + "");
+           } catch(Exception e){
+               System.out.println("Required number");
+           }
+       } while (true);
     }
 
     //regex for username
-    public static final Pattern VALID_READER_ID_REGEX = Pattern.compile("^(L|S)\\d{4}$");
+    public static final Pattern VALID_READER_ID_REGEX = Pattern.compile("^(L|R)\\d{4}$");
 
     public static final Pattern VALID_USERNAME_REGEX = Pattern.compile("^[a-zA-Z][a-zA-Z0-9]*$");
 
@@ -132,6 +128,26 @@ public class MyUtils {
                 return gender.toLowerCase(); // Trả về giới tính ở dạng chữ thường
             }
             System.out.println("Gender must be 'male' or 'female' (case insensitive)!");
+        } while (true);
+    }
+    
+    public static LocalDate inputLocalDate(String message) {
+        Scanner sc = new Scanner(System.in);
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        do {
+            System.out.print(message);
+            String dateStr = sc.nextLine();
+
+            if (dateStr.trim().isEmpty()) {
+                System.out.println("value must be filled!");
+            } else {
+                try {
+                    LocalDate date = LocalDate.parse(dateStr, dateFormatter);
+                    return date;
+                } catch (java.time.format.DateTimeParseException ex) {
+                    System.out.println("Invalid date format. Please enter date in format 'dd-MM-yyyy'.");
+                }
+            }
         } while (true);
     }
 
