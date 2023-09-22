@@ -1,11 +1,14 @@
 package test;
 
 import controller.BookController;
+import controller.IssueBookController;
 import controller.LibrarianController;
 import model.Reader;
 import controller.ReaderController;
 import controller.UserController;
 import model.Book;
+import model.IssueBook;
+import model.Librarian;
 import model.User;
 
 public class Tester {
@@ -15,7 +18,7 @@ public class Tester {
         ReaderController readerController = new ReaderController();
         LibrarianController librarianController = new LibrarianController();
         BookController bookController = new BookController();
-        
+        IssueBookController issuebookController = new IssueBookController();        
 //        //User user = userController.addReaderUser();
 //        User user1 = userController.addLibrarianUser();
 //        //test insert
@@ -31,15 +34,46 @@ public class Tester {
 //
 //  
 //
-//        bookController.addBook(7);
+//        bookController.addBook(8);
+//                bookController.addBook(9);
+//                        bookController.addBook(10);
 //
 //
-//        //test select all book
-//        System.out.println("Book list:");
+////        test select all book
+//        System.out.println("+---------------------------------------------------------------------------------------------------------------------------------------------+");
+//        System.out.println("|  ID  |                 Title                   |           Author          |    Price    |    Category    | TotalAvailable | BorrowDuration |");
+//        System.out.println("+---------------------------------------------------------------------------------------------------------------------------------------------+");
 //        for(Book book : bookController.getAllBook()){
 //            System.out.println(book.toString());
 //        }
-//        
+
+
+//       //In bảng thủ thư
+//        System.out.println("+---------------------------------------------------------------------------------------------------------------------+");
+//        System.out.println("|    ID    |                Name                |            Email          |    Phone    |  Gender  |     Salary     |");
+//        System.out.println("+---------------------------------------------------------------------------------------------------------------------+");
+//        for(Librarian librarian: librarianController.getAllLibrarian()){
+//            System.out.println(librarian.toString());
+//        }
+
+////      In bảng người đọc
+//        System.out.println("+--------------------------------------------------------------------------------------------------------------+");
+//        System.out.println("|    ID    | User ID |                Name                |            Email          |    Phone    |  Gender  |");
+//        System.out.println("+--------------------------------------------------------------------------------------------------------------+");
+//        for(Reader reader: readerController.getAllReaders()){
+//            System.out.println(reader.toString());
+//        }
+
+
+////       In bảng user
+//        System.out.println("+-----------------------------------------------------------------------------------------+");
+//        System.out.println("| User ID |              Username              |         Password        |    User Type   |");
+//        System.out.println("+-----------------------------------------------------------------------------------------+");
+//        for(User user: userController.getAllUser()){
+//            System.out.println(user.toString());
+//        }
+
+
 //        //Cập nhật thông tin sách
 //        Book newBook = bookController.getBookById(2);
 //        if(newBook != null){

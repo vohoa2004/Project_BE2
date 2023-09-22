@@ -67,6 +67,10 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "userId=" + userId + ", username=" + username + ", password=" + password + ", userType=" + userType + '}';
+//        System.out.println("+-----------------------------------------------------------------------------------------+");
+//        System.out.println("| User ID |              Username              |         Password        |    User Type   |");
+//        System.out.println("+-----------------------------------------------------------------------------------------+");
+        return String.format("|    %-2d   | %-35s| %-24s| %-15s|",
+                userId, username, password, userType);
     }
 }

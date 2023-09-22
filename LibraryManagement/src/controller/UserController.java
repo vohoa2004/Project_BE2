@@ -1,6 +1,8 @@
 package controller;
 
 import dao.UserDAO;
+import java.util.ArrayList;
+import model.Book;
 import model.User;
 import utils.MyUtils;
 
@@ -35,7 +37,7 @@ public class UserController {
         }
         return user;
     }
-    
+     
     public User addLibrarianUser() {
         String userName = MyUtils.inputString("Input user name: ");
         while(!MyUtils.validateUsername(userName)) {

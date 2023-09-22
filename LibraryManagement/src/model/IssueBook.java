@@ -2,6 +2,7 @@ package model;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.Locale;
 
 public class IssueBook {
 
@@ -119,17 +120,9 @@ public class IssueBook {
     @Override
     public String toString() {
         String statusString = borrowing ? "Borrowing" : "Returned";
-        return "Transaction{"
-                + "transactionId=" + transactionId
-                + ", charges=" + charges
-                + ", issueDate=" + issueDate
-                + ", dueDate=" + dueDate
-                + ", returnDate= " + returnDate
-                + ", fine=" + fine
-                + ", readerId=" + readerId
-                + ", quantity=" + quantity
-                + ", status='" + statusString + '\''
-                + '}';
+        return String.format("|  %-2s  | %-12.0f|%-40L|%-40L| %-40L|%-12.0f| %-26s| %-12.0f|       %-9d| %-15s|",
+                transactionId, charges,issueDate, dueDate, returnDate, fine, readerId, quantity, statusString );
+                
     }
 
     private LocalDate calculateDueDate(LocalDate issueDate, int duration) {
