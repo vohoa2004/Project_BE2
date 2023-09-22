@@ -1,5 +1,7 @@
 package utils;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -19,7 +21,9 @@ public class MyUtils {
             if (!value.isEmpty()) {
                 return value;
             }
-            System.out.println("Value can not be empty!");
+            else {
+                return null;
+            }
         } while (true);
     }
 
@@ -51,6 +55,26 @@ public class MyUtils {
                 System.out.println("Value is only in [" + min + ", " + max + "]");
             } catch (Exception e) {
                 System.out.println("Required number");
+            }
+        } while (true);
+    }
+    
+    public static LocalDate inputLocalDate(String message) {
+        Scanner sc = new Scanner(System.in);
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        do {
+            System.out.print(message);
+            String dateStr = sc.nextLine();
+
+            if (dateStr.trim().isEmpty()) {
+                System.out.println("value must be filled!");
+            } else {
+                try {
+                    LocalDate date = LocalDate.parse(dateStr, dateFormatter);
+                    return date;
+                } catch (java.time.format.DateTimeParseException ex) {
+                    System.out.println("Invalid date format. Please enter date in format 'dd-MM-yyyy'.");
+                }
             }
         } while (true);
     }

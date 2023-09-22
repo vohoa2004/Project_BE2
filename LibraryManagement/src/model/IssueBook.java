@@ -32,6 +32,19 @@ public class IssueBook {
         this.bookId = bookId;
     }
 
+    public IssueBook(double charges, LocalDate issueDate, LocalDate dueDate, double fine, String readerId, int quantity, boolean borrowing, int bookId) {
+        this.charges = charges;
+        this.issueDate = issueDate;
+        this.dueDate = dueDate;
+        this.fine = fine;
+        this.readerId = readerId;
+        this.quantity = quantity;
+        this.borrowing = borrowing;
+        this.bookId = bookId;
+    }
+    
+    
+
     public String getReaderId() {
         return readerId;
     }

@@ -36,5 +36,3 @@ BEGIN
 END;
 //
 DELIMITER ;
-
-DROP TRIGGER update_returned_book;

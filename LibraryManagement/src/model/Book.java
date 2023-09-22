@@ -33,6 +33,8 @@ public class Book {
         this.totalAvailable = totalAvailable;
         this.borrowDuration = borrowDuration;
     }
+    
+    
 
     public int getId() {
         return id;
