@@ -54,6 +54,23 @@ public class MyUtils {
             }
         } while (true);
     }
+    
+    public static Double inputBookDouble(String message, int min){
+       Scanner sc = new Scanner(System.in);
+       do{
+           try {
+               System.out.print(message);
+               Double number = Double.parseDouble(sc.nextLine());
+               if(number > min){
+                   return number;
+               }
+               //else
+               System.out.print("Value must be greater than " + min + "");
+           } catch(Exception e){
+               System.out.println("Required number");
+           }
+       } while (true);
+    }
 
     //regex for username
     public static final Pattern VALID_READER_ID_REGEX = Pattern.compile("^(L|S)\\d{4}$");
