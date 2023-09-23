@@ -93,7 +93,7 @@ public class MyUtils {
     }
     
     public static boolean validateLibrarianId(String id) {
-        Matcher matcher = VALID_READER_ID_REGEX.matcher(id);
+        Matcher matcher = VALID_LIBRARIAN_ID_REGEX.matcher(id);
         return matcher.matches();
     }
 

@@ -46,24 +46,34 @@ public class Tester {
 //  
 //
 //test select all book
-        System.out.println("Book list:");
-        for (Book book : bookController.getAllBook()) {
-            System.out.println(book.toString());
-        }
-
-        //Cập nhật thông tin sách
-        Integer id = MyUtils.inputInteger("input id of book to update: ", 1, Integer.MAX_VALUE);
-        Book newBook = bookController.getBookById(id);
-
-        if (newBook != null) {
-            boolean update = bookController.updateBook(newBook);
-            if (update) {
-                System.out.println("Update reader information successfully!");
-            } else {
-                System.out.println("Error when updating reader.");
-            }
-        } else {
-            System.out.println("Reader not found with the specified ID.");
-        }
+//        System.out.println("Book list:");
+//        for (Book book : bookController.getAllBook()) {
+//            System.out.println(book.toString());
+//        }
+//
+//        //Cập nhật thông tin sách
+//        Integer id = MyUtils.inputInteger("input id of book to update: ", 1, Integer.MAX_VALUE);
+//        Book newBook = bookController.getBookById(id);
+//
+//        if (newBook != null) {
+//            boolean update = bookController.updateBook(newBook);
+//            if (update) {
+//                System.out.println("Update reader information successfully!");
+//            } else {
+//                System.out.println("Error when updating reader.");
+//            }
+//        } else {
+//            System.out.println("Reader not found with the specified ID.");
+//        }
+        User user1 = userController.addLibrarianUser();
+        librarianController.addLibrarian(user1.getUserId());
+        //test getAllUser
+        userController.getAllUser();
+        //test updateUser
+        userController.updateUser();
+        //test gestAllLibrarian
+        librarianController.getAllLibrarians();
+        //test getLibrarianById
+        librarianController.getLibrarianById();
     }
 }
