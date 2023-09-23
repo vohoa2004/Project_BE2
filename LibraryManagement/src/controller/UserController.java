@@ -69,21 +69,19 @@ public class UserController {
         return user;
     }
 
-    public void updateUser() {
-        int userIdToUpdate = MyUtils.inputPositiveNumber("Enter the User ID you want to update: ");
-        User userUpdate = userDAO.selectById(userIdToUpdate);
-
+    public void updateUser(User userUpdate) {
         if (userUpdate != null) {
+            int userIdToUpdate = userUpdate.getUserId();
             String newPassword = MyUtils.inputString("Enter your new password: ");
             userUpdate.setPassword(newPassword);
-            int rowUpdated = userDAO.update(userUpdate, userIdToUpdate);
+            int rowUpdated = userDAO.update(userUpdate, userUpdate.getUserId());
             if (rowUpdated == 1) {
                 System.out.println("Password updated successfully with ID: " + userIdToUpdate);
             } else {
                 System.out.println("Fail to update password!!!");
             }
         } else {
-            System.out.println("User with ID " + userIdToUpdate + " not found. Please enter again!!");
+            System.out.println("User with this ID not found. Please enter again!!");
         }
     }
 

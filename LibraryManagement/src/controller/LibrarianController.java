@@ -70,7 +70,26 @@ public class LibrarianController {
             librarian.setPhone(newPhone);
         }
 
-        System.out.print("Enter new salary (press Enter to keep current salary): ");
+//        System.out.print("Enter new salary (press Enter to keep current salary): ");
+//        String newSalaryStr = scanner.nextLine().trim();
+//        if (!newSalaryStr.isEmpty()) {
+//            try {
+//                double newSalary = Double.parseDouble(newSalaryStr);
+//                librarian.setSalary(newSalary);
+//            } catch (NumberFormatException e) {
+//                System.out.println("Invalid salary format. Keeping current salary.");
+//            }
+//        }
+
+        librarianDAO.update(librarian);
+        System.out.println("Librarian information updated successfully!");
+    }
+    
+    public void updateLibrarianByHeadLibrarian(String librarianId) {
+        Librarian librarian = searchLibrarian(librarianId);
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter new salary for this librarian (press Enter to keep current salary): ");
         String newSalaryStr = scanner.nextLine().trim();
         if (!newSalaryStr.isEmpty()) {
             try {
@@ -84,6 +103,7 @@ public class LibrarianController {
         librarianDAO.update(librarian);
         System.out.println("Librarian information updated successfully!");
     }
+
 
     public ArrayList<Librarian> getAllLibrarians() {
         ArrayList<Librarian> librarians = librarianDAO.selectAll();

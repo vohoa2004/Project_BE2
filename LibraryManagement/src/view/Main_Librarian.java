@@ -32,7 +32,7 @@ public class Main_Librarian {
         System.out.println();
         String header2 = "LIBRARIAN";
         String[] options2 = {"View your information", "Update your information", "Manage books",
-            "Manage readers", "Manage transactions", "Logout"};
+            "Manage readers", "Manage transactions", "Manage other librarians (only for head librarian)", "Logout",};
         int selection;
         do {
             selection = Menu.getChoice(options2, header2);
@@ -47,8 +47,12 @@ public class Main_Librarian {
                     break;
                 }
                 case 2: {
-
                     if (librarian != null) {
+                        String confirm = MyUtils.inputString("Do you want to update your password? (Y/y - Yes, Other - No)");
+                        if (confirm.equalsIgnoreCase("y")) {
+                            userController.updateUser(user);
+                        }
+                        System.out.println("Update other information: ");
                         librarianController.updateLibrarian(librarian.getLibrarianId());
                     } else {
                         System.out.println("Not found your information!");
@@ -173,12 +177,68 @@ public class Main_Librarian {
                     break;
                 }
                 case 6: {
+                    System.out.println();
+                    if (!librarian.getLibrarianId().equals("L0001")) {
+                        System.out.println("Sorry! this feature is not available for you!");
+                    } else {
+                        String header2a = "MANAGE OTHER LIBRARIAN";
+                        String[] options2a = {"Add new librarian", "See list of all librarians",
+                            "Search librarian by librarian id",
+                            "Update salary for a librarian"};
+                        int option;
+                        option = Menu.getChoice(options2a, header2a);
+                        switch (option) {
+                            case 1: {
+                                User newUser = userController.addLibrarianUser();
+                                librarianController.addLibrarian(newUser.getUserId());
+                                break;
+                            }
+                            case 2: {
+                                ArrayList<Librarian> list = librarianController.getAllLibrarians();
+                                if (!list.isEmpty()) {
+                                    for (Librarian x : list) {
+                                        System.out.println(x.toString());
+                                    }
+                                } else {
+                                    System.out.println("There is no librarian!");
+                                }
+                                break;
+                            }
+                            case 3: {
+                                String id = MyUtils.inputString("Enter librarian id: ");
+                                Librarian librarianToFind = librarianController.searchLibrarian(id);
+                                if (librarianToFind == null) {
+                                    System.out.println("This librarian is not exist!");
+                                } else {
+                                    System.out.println("Found the librarian!");
+                                    System.out.println(librarianToFind);
+                                }
+                                break;
+                            }
+                            case 4: {
+                                String id = MyUtils.inputString("Enter librarian id: ");
+                                Librarian librarianToFind = librarianController.searchLibrarian(id);
+                                if (librarianToFind == null) {
+                                    System.out.println("This librarian is not exist!");
+                                } else {
+                                    System.out.println("Found the librarian!");
+                                    System.out.println(librarianToFind);
+                                    librarianController.updateLibrarianByHeadLibrarian(id);
+                                }
+                                break;
+                            }
+                        }
+                    }
+                    break;
+
+                }
+                case 7: {
                     System.out.println("Bye Bye!");
                     System.exit(0);
                 }
             }
 
-        } while (selection != 6);
+        } while (selection != 7);
 
     }
 }
