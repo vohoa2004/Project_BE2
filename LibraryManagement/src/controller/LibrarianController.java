@@ -1,6 +1,7 @@
 package controller;
 
 import dao.LibrarianDAO;
+import java.util.ArrayList;
 import java.util.Scanner;
 import model.Librarian;
 import utils.MyUtils;
@@ -82,6 +83,30 @@ public class LibrarianController {
 
         librarianDAO.update(librarian);
         System.out.println("Librarian information updated successfully!");
+    }
+
+    public ArrayList<Librarian> getAllLibrarians() {
+        ArrayList<Librarian> librarians = librarianDAO.selectAll();
+        System.out.println("----Librarian list----");
+        for (Librarian librarian : librarians) {
+            System.out.println(librarian.toString());
+        }
+        return librarians;
+    }
+
+    public Librarian getLibrarianById() {
+        String librarianId;
+        do {
+            librarianId = MyUtils.inputString("Enter the Librarian ID you want to find: ");
+        } while (!MyUtils.validateLibrarianId(librarianId));
+        Librarian librarian = librarianDAO.selectById(librarianId);
+        if (librarian != null) {
+            System.out.println("Found librarian by ID: " + librarian.toString());
+        } else {
+            System.out.println("Librarian not found with the ID.");
+        }
+        return librarian;
+
     }
 
 }

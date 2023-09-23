@@ -76,7 +76,9 @@ public class MyUtils {
     }
 
     //regex for username
-    public static final Pattern VALID_READER_ID_REGEX = Pattern.compile("^(L|R)\\d{4}$");
+
+    public static final Pattern VALID_READER_ID_REGEX = Pattern.compile("^(R)\\d{4}$");
+    public static final Pattern VALID_LIBRARIAN_ID_REGEX = Pattern.compile("^(L)\\d{4}$");
 
     public static final Pattern VALID_USERNAME_REGEX = Pattern.compile("^[a-zA-Z][a-zA-Z0-9]*$");
 
@@ -86,6 +88,11 @@ public class MyUtils {
     }
 
     public static boolean validateReaderId(String id) {
+        Matcher matcher = VALID_READER_ID_REGEX.matcher(id);
+        return matcher.matches();
+    }
+    
+    public static boolean validateLibrarianId(String id) {
         Matcher matcher = VALID_READER_ID_REGEX.matcher(id);
         return matcher.matches();
     }
@@ -151,4 +158,24 @@ public class MyUtils {
         } while (true);
     }
 
+
+    // check enter number > 0
+    public static Integer inputPositiveNumber(String message) {
+        Scanner sc = new Scanner(System.in);
+        do {
+            try {
+                System.out.print(message);
+                Integer number = Integer.parseInt(sc.nextLine());
+                if (number > 0) {
+                    return number;
+                }
+                System.out.println("Value need to be >0 ");
+            } catch (NumberFormatException e) {
+                System.out.println("Required number");
+            }
+        } while (true);
+
+    }
+
 }
+
