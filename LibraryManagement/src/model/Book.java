@@ -19,7 +19,7 @@ public class Book {
     private String category;
     private int totalAvailable;
     private int borrowDuration; // so ngay toi da duoc phep muon loai sach nay
-    
+
     // Constructor
     public Book() {
     }
@@ -42,8 +42,6 @@ public class Book {
         this.totalAvailable = totalAvailable;
         this.borrowDuration = borrowDuration;
     }
-    
-    
 
     public int getId() {
         return id;
@@ -102,17 +100,13 @@ public class Book {
     }
 
     // toString()
+//        System.out.println("+---------------------------------------------------------------------------------------------------------------------------------------------+");
+//        System.out.println("|  ID  |                 Title                   |           Author          |    Price    |    Category    | TotalAvailable | BorrowDuration |");
+//        System.out.println("+---------------------------------------------------------------------------------------------------------------------------------------------+");
     @Override
     public String toString() {
-        return "Book{"
-                + "id=" + id
-                + ", title='" + title + '\''
-                + ", author='" + author + '\''
-                + ", price=" + price
-                + ", category='" + category + '\''
-                + ", totalAvailable=" + totalAvailable
-                + ", borrowDuration=" + borrowDuration
-                + '}';
+        return String.format("|  %-2d  | %-40s| %-26s| %-12.0f| %-15s|       %-9d|       %-9d|",
+                id, title, author, price, category, totalAvailable, borrowDuration);
     }
 
 }

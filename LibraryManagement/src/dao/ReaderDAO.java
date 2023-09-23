@@ -113,6 +113,36 @@ public class ReaderDAO {
         }
         return result;
     }
+    
+    public Reader selectByUserId(int userId) {
+        Connection connection = JDBCUtil.getConnection();
+       
+        String sql = "SELECT * FROM reader WHERE User_Id=?";
+        Reader result = null;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, userId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                String readerId = resultSet.getString("readerId");
+                String name = resultSet.getString("Name");
+                String gender = resultSet.getString("Gender");
+                String email = resultSet.getString("Email");
+                String phone = resultSet.getString("Phone");
+
+                result = new Reader(readerId, userId, name, email, phone, gender);
+            }
+        } catch (SQLException e) {
+            System.out.println("error 1");
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                System.out.println("error 2");
+            }
+        }
+        return result;
+    }
 
     public ArrayList<Reader> selectAll() {
         Connection connection = JDBCUtil.getConnection();

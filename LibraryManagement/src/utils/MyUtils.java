@@ -177,5 +177,9 @@ public class MyUtils {
 
     }
 
+    public static int inputInt(String enter_your_choice_) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
 

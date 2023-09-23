@@ -93,6 +93,11 @@ public class LibrarianController {
         }
         return librarians;
     }
+    
+    public ArrayList<Librarian> findAllLibrarians() {
+        ArrayList<Librarian> librarians = librarianDAO.selectAll();
+        return librarians;
+    }
 
     public Librarian getLibrarianById() {
         String librarianId;
@@ -108,5 +113,16 @@ public class LibrarianController {
         return librarian;
 
     }
+    
+    public Librarian getLibrarianByUserId(int userId) {
+        ArrayList<Librarian> librarians = findAllLibrarians();
+        for (Librarian x : librarians) {
+            if (x.getUserId() == userId) {
+                return x;
+            }
+        }
+        return null;
+    }
+    
 
 }

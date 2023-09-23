@@ -30,7 +30,7 @@ public class BookController {
         Double price = MyUtils.inputBookDouble("Input price: ", 0);
         String category = MyUtils.inputString("Input category: ");
         int totalAvailable = MyUtils.inputInteger("Input total Avalable: ", 0, 200);
-        int borrowDuration = MyUtils.inputInteger("Input Duration: ", 1, 30);
+        int borrowDuration = MyUtils.inputInteger("Input Duration: ", 1, 60);
 
         Book book = new Book(title, author, price, category, totalAvailable, borrowDuration);
         bookDAO.insert(book);
@@ -79,6 +79,15 @@ public class BookController {
 
         return true;
     }
+    
+    public void update(Book book, int newQuantity) {
+        book.setTotalAvailable(newQuantity);
+        if (bookDAO.update(book) > 0) {
+            System.out.println("Updated successfully!");
+        } else {
+            System.out.println("Cannot update this book!");
+        }
+    }
 
     public boolean deleteBook(int id) {
         bookDAO.delete(id);
@@ -91,5 +100,37 @@ public class BookController {
 
     public ArrayList<Book> getAllBook() {
         return (ArrayList<Book>) bookDAO.selectAll();
+    }
+
+    public ArrayList<Book> getBookByName(String name) {
+        ArrayList<Book> books = getAllBook();
+        ArrayList<Book> list = new ArrayList<>();
+        for (Book x : books) {
+            if (x.getTitle().toLowerCase().contains(name.toLowerCase())) {
+                list.add(x);
+            }
+        }
+        return list;
+    }
+
+    public ArrayList<Book> getBookByAuthor(String author) {
+        ArrayList<Book> books = getAllBook();
+        ArrayList<Book> list = new ArrayList<>();
+        for (Book x : books) {
+            if (x.getAuthor().toLowerCase().contains(author.toLowerCase())) {
+                list.add(x);
+            }
+        }
+        return list;
+    }
+
+    public void showList(ArrayList<Book> books) {
+        if (books.isEmpty()) {
+            System.out.println("Book not found!");
+        }
+        for (Book x : books) {
+            System.out.println(x.toString());
+        }
+
     }
 }

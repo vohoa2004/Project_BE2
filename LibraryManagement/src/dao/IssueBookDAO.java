@@ -23,7 +23,7 @@ public class IssueBookDAO {
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, issueBook.getQuantity());
             preparedStatement.setDouble(2, issueBook.getCharges());
-            preparedStatement.setDouble(3, issueBook.getFine());
+            preparedStatement.setDouble(3, 0.0);
             preparedStatement.setDate(4, java.sql.Date.valueOf(issueBook.getIssueDate()));
             preparedStatement.setDate(5, java.sql.Date.valueOf(issueBook.getDueDate()));
             preparedStatement.setBoolean(6, issueBook.isBorrowing());
@@ -101,7 +101,7 @@ public class IssueBookDAO {
         Connection connection = JDBCUtil.getConnection();
 
         ArrayList<IssueBook> list = new ArrayList<>();
-        String sql = "SELECT * FROM issueBook WHERE ReaderId=?";
+        String sql = "SELECT * FROM issueBook WHERE Reader_Id=?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, readerId);
@@ -115,7 +115,7 @@ public class IssueBookDAO {
                 java.sql.Date due_date = resultSet.getDate("Due_date");
                 java.sql.Date return_date = resultSet.getDate("Return_date");
                 LocalDate returnDate = (return_date != null) ? return_date.toLocalDate() : null;
-                boolean status = resultSet.getBoolean("status");
+                boolean status = resultSet.getBoolean("Status");
                 int book_id = resultSet.getInt("Book_id");
 
                 list.add(new IssueBook(issueBookId, charges, issue_date.toLocalDate(), due_date.toLocalDate(), returnDate,
@@ -148,8 +148,8 @@ public class IssueBookDAO {
                 java.sql.Date due_date = resultSet.getDate("Due_date");
                 java.sql.Date return_date = resultSet.getDate("Return_date");
                 LocalDate returnDate = (return_date != null) ? return_date.toLocalDate() : null;
-                boolean status = resultSet.getBoolean("status");
-                int book_id = resultSet.getInt("Book_id");
+                boolean status = resultSet.getBoolean("Status");
+                int book_id = resultSet.getInt("Book_Id");
                 String reader_id = resultSet.getString("Reader_Id");
 
                 result = new IssueBook(transactionId, charges,
@@ -186,10 +186,15 @@ public class IssueBookDAO {
                 java.sql.Date issue_date = resultSet.getDate("Issue_date");
                 java.sql.Date due_date = resultSet.getDate("Due_date");
                 java.sql.Date return_date = resultSet.getDate("Return_date");
-                boolean status = resultSet.getBoolean("status");
-                int book_id = resultSet.getInt("Book_id");
-                String readerId = resultSet.getString("Reder_id");
-                list.add(new IssueBook(issueBookId, charges, issue_date.toLocalDate(), due_date.toLocalDate(), return_date.toLocalDate(),
+                LocalDate returnDate = null;
+                if (return_date != null) {
+                    returnDate = return_date.toLocalDate();
+                }
+                boolean status = resultSet.getBoolean("Status");
+                int book_id = resultSet.getInt("Book_Id");
+                String readerId = resultSet.getString("Reader_Id");
+                list.add(new IssueBook(issueBookId, charges, issue_date.toLocalDate(), due_date.toLocalDate(), 
+                        returnDate,
                         fine, readerId, quantity, status, book_id));
             }
         } catch (SQLException e) {

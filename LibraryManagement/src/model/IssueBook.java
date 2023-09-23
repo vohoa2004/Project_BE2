@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 public class IssueBook {
@@ -42,8 +43,6 @@ public class IssueBook {
         this.borrowing = borrowing;
         this.bookId = bookId;
     }
-    
-    
 
     public String getReaderId() {
         return readerId;
@@ -52,8 +51,6 @@ public class IssueBook {
     public void setReaderId(String readerId) {
         this.readerId = readerId;
     }
-    
-    
 
     public LocalDate getIssueDate() {
         return issueDate;
@@ -118,8 +115,6 @@ public class IssueBook {
     public void setBorrowing(boolean borrowing) {
         this.borrowing = borrowing;
     }
-    
-    
 
     public int getBookId() {
         return bookId;
@@ -129,32 +124,25 @@ public class IssueBook {
         this.bookId = bookId;
     }
 
+//    @Override
+//    public String toString() {
+//        String statusString = borrowing ? "Borrowing" : "Returned";
+//
+//        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//        String issueDateStr = issueDate.format(dateFormatter);
+//        String dueDateStr = dueDate.format(dateFormatter);
+//        String returnDateStr = returnDate != null ? returnDate.format(dateFormatter) : "N/A";
+//
+//        return String.format("|  %-2d  | %-12.2f | %-40s | %-40s | %-40s | %-12.2f | %-26s | %-12d | %-9d | %-15s |",
+//                transactionId, charges, issueDateStr, dueDateStr, returnDateStr, fine, readerId, quantity, statusString);
+//    }
+
     @Override
     public String toString() {
-        String statusString = borrowing ? "Borrowing" : "Returned";
-        return "Transaction{"
-                + "transactionId=" + transactionId
-                + ", charges=" + charges
-                + ", issueDate=" + issueDate
-                + ", dueDate=" + dueDate
-                + ", returnDate= " + returnDate
-                + ", fine=" + fine
-                + ", readerId=" + readerId
-                + ", quantity=" + quantity
-                + ", status='" + statusString + '\''
-                + '}';
+        return "IssueBook{" + "transactionId=" + transactionId + ", charges=" + charges + ", issueDate=" + issueDate + ", dueDate=" + dueDate + ", returnDate=" + returnDate + ", fine=" + fine + ", readerId=" + readerId + ", quantity=" + quantity + ", borrowing=" + borrowing + ", bookId=" + bookId + '}';
     }
 
-    private LocalDate calculateDueDate(LocalDate issueDate, int duration) {
-        return issueDate.plusDays(duration);
-    }
-
-    private double calculateFine(LocalDate dueDate) {
-        LocalDate today = LocalDate.now();
-        if (dueDate.isBefore(today)) {
-            long daysLate = ChronoUnit.DAYS.between(dueDate, today);
-            return daysLate * 10000;
-        }
-        return 0;
-    }
+    
+    
+    
 }
