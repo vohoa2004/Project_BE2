@@ -32,7 +32,7 @@ public class JDBCUtil {
             // Các thông số
             String url = "jdbc:mySQL://localhost:3306/librarymanagement";
             String username = "root";
-            String password = "12345";
+            String password = "tien3101";
 
             // Tạo kết nối
             c = DriverManager.getConnection(url, username, password);
