@@ -173,8 +173,8 @@ public class Main_Librarian {
                     break;
                 }
                 case 6: {
-                    System.out.println("Bye Bye!");
-                    System.exit(0);
+                    System.out.println("Logout successfully!");
+                    return;
                 }
             }
 
