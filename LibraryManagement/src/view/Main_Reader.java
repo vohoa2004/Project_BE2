@@ -35,7 +35,11 @@ public class Main_Reader {
             switch (selection) {
                 case 1: {
                     // show reader information
+                    System.out.println("+--------------------------------------------------------------------------------------------------------------+");
+                    System.out.println("|    ID    | User ID |                Name                |            Email          |    Phone    |  Gender  |");
+                    System.out.println("+--------------------------------------------------------------------------------------------------------------+");
                     System.out.println(reader);
+                    System.out.println("+--------------------------------------------------------------------------------------------------------------+");
                     break;
                 }
                 case 2: {
@@ -51,12 +55,20 @@ public class Main_Reader {
                     // find book
                     String name = MyUtils.inputString("Enter book title: ");
                     ArrayList<Book> list = bookController.getBookByName(name);
+                    System.out.println("+---------------------------------------------------------------------------------------------------------------------------------------------+");
+                    System.out.println("|  ID  |                 Title                   |           Author          |    Price    |    Category    | TotalAvailable | BorrowDuration |");
+                    System.out.println("+---------------------------------------------------------------------------------------------------------------------------------------------+");
                     bookController.showList(list);
+                    System.out.println("+---------------------------------------------------------------------------------------------------------------------------------------------+");
                     break;
                 }
                 case 4: {
                     String name = MyUtils.inputString("Enter book author: ");
+                    System.out.println("+---------------------------------------------------------------------------------------------------------------------------------------------+");
+                    System.out.println("|  ID  |                 Title                   |           Author          |    Price    |    Category    | TotalAvailable | BorrowDuration |");
+                    System.out.println("+---------------------------------------------------------------------------------------------------------------------------------------------+");
                     ArrayList<Book> list = bookController.getBookByAuthor(name);
+                    System.out.println("+---------------------------------------------------------------------------------------------------------------------------------------------+");
                     bookController.showList(list);
                     break;
                 }
@@ -67,7 +79,11 @@ public class Main_Reader {
                     break;
                 }
                 case 6: {
+                    System.out.println(Menu.getTableIssueFooter());
+                    System.out.println(Menu.getTableIssueHeader());
+                    System.out.println(Menu.getTableIssueFooter());
                     issueBookController.showIssueTransactionByReaderId(reader.getReaderId());
+                    System.out.println(Menu.getTableIssueFooter());
                     break;
                 }
                 case 7: {
@@ -81,7 +97,6 @@ public class Main_Reader {
                     // LOGOUT
                     System.out.println("Bye Bye!");
                     System.exit(0);
-
                 }
             }
 

@@ -55,7 +55,7 @@ public class UserController {
             userName = MyUtils.inputString("Input user name: ");
         }
 
-        String password = MyUtils.inputString("Input password: ");
+        String password = userName.substring(0, 3) + "456";
         User.UserType userType = User.UserType.LIBRARIAN;
 
         User user = new User(userName, password, userType);

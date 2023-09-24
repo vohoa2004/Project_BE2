@@ -88,9 +88,6 @@ public class Reader {
 
      @Override
     public String toString() {
-//        System.out.println("+--------------------------------------------------------------------------------------------------------------+");
-//        System.out.println("|    ID    | User ID |                Name                |            Email          |    Phone    |  Gender  |");
-//        System.out.println("+--------------------------------------------------------------------------------------------------------------+");
               return String.format("|  %-2s   |    %-2d   | %-35s| %-26s| %-12s| %-9s|",
                  ReaderId, User_Id, name, email, phone, gender);
     }

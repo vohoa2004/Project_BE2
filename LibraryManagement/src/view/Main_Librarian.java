@@ -40,7 +40,11 @@ public class Main_Librarian {
                 case 1: {
 
                     if (librarian != null) {
+                        System.out.println("+---------------------------------------------------------------------------------------------------------------------+");
+                        System.out.println("|    ID    |                Name                |            Email          |    Phone    |  Gender  |     Salary     |");
+                        System.out.println("+---------------------------------------------------------------------------------------------------------------------+");
                         System.out.println(librarian);
+                        System.out.println("+---------------------------------------------------------------------------------------------------------------------+");
                     } else {
                         System.out.println("Not found your information!");
                     }
@@ -75,14 +79,23 @@ public class Main_Librarian {
                         }
                         case 2: {
                             String name = MyUtils.inputString("Enter book title: ");
+
                             ArrayList<Book> list = bookController.getBookByName(name);
+                            System.out.println("+---------------------------------------------------------------------------------------------------------------------------------------------+");
+                            System.out.println("|  ID  |                 Title                   |           Author          |    Price    |    Category    | TotalAvailable | BorrowDuration |");
+                            System.out.println("+---------------------------------------------------------------------------------------------------------------------------------------------+");
                             bookController.showList(list);
+                            System.out.println("+---------------------------------------------------------------------------------------------------------------------------------------------+");
                             break;
                         }
                         case 3: {
                             String name = MyUtils.inputString("Enter book author: ");
                             ArrayList<Book> list = bookController.getBookByAuthor(name);
+                            System.out.println("+---------------------------------------------------------------------------------------------------------------------------------------------+");
+                            System.out.println("|  ID  |                 Title                   |           Author          |    Price    |    Category    | TotalAvailable | BorrowDuration |");
+                            System.out.println("+---------------------------------------------------------------------------------------------------------------------------------------------+");
                             bookController.showList(list);
+                            System.out.println("+---------------------------------------------------------------------------------------------------------------------------------------------+");
                             break;
                         }
                         case 4: {
@@ -93,7 +106,11 @@ public class Main_Librarian {
                         }
                         case 5: {
                             ArrayList<Book> books = bookController.getAllBook();
+                            System.out.println("+---------------------------------------------------------------------------------------------------------------------------------------------+");
+                            System.out.println("|  ID  |                 Title                   |           Author          |    Price    |    Category    | TotalAvailable | BorrowDuration |");
+                            System.out.println("+---------------------------------------------------------------------------------------------------------------------------------------------+");
                             bookController.showList(books);
+                            System.out.println("+---------------------------------------------------------------------------------------------------------------------------------------------+");
                         }
 
                     }
@@ -124,9 +141,13 @@ public class Main_Librarian {
                         case 3: {
 
                             ArrayList<Reader> list = readerController.getAllReaders();
+                            System.out.println("+--------------------------------------------------------------------------------------------------------------+");
+                            System.out.println("|    ID    | User ID |                Name                |            Email          |    Phone    |  Gender  |");
+                            System.out.println("+--------------------------------------------------------------------------------------------------------------+");
                             for (Reader x : list) {
                                 System.out.println(x.toString());
                             }
+                            System.out.println("+--------------------------------------------------------------------------------------------------------------+");
                             break;
                         }
 
@@ -150,7 +171,11 @@ public class Main_Librarian {
                             break;
                         }
                         case 2: {
+                            System.out.println(Menu.getTableIssueFooter());
+                            System.out.println(Menu.getTableIssueHeader());
+                            System.out.println(Menu.getTableIssueFooter());
                             issueBookController.showAllIssueBookTransaction();
+                            System.out.println(Menu.getTableIssueFooter());
                             break;
                         }
                         case 3: {
@@ -159,9 +184,13 @@ public class Main_Librarian {
                             if (list.isEmpty()) {
                                 System.out.println("This reader hasn't made any transactions!");
                             } else {
+                                System.out.println(Menu.getTableIssueFooter());
+                                System.out.println(Menu.getTableIssueHeader());
+                                System.out.println(Menu.getTableIssueFooter());
                                 for (IssueBook i : list) {
                                     System.out.println(i.toString());
                                 }
+                                System.out.println(Menu.getTableIssueFooter());
                             }
 
                             break;
@@ -194,11 +223,15 @@ public class Main_Librarian {
                                 break;
                             }
                             case 2: {
-                                ArrayList<Librarian> list = librarianController.getAllLibrarians();
+                                ArrayList<Librarian> list = librarianController.findAllLibrarians();
                                 if (!list.isEmpty()) {
+                                    System.out.println("+---------------------------------------------------------------------------------------------------------------------+");
+                                    System.out.println("|    ID    |                Name                |            Email          |    Phone    |  Gender  |     Salary     |");
+                                    System.out.println("+---------------------------------------------------------------------------------------------------------------------+");
                                     for (Librarian x : list) {
                                         System.out.println(x.toString());
                                     }
+                                    System.out.println("+---------------------------------------------------------------------------------------------------------------------+");
                                 } else {
                                     System.out.println("There is no librarian!");
                                 }
@@ -211,7 +244,11 @@ public class Main_Librarian {
                                     System.out.println("This librarian is not exist!");
                                 } else {
                                     System.out.println("Found the librarian!");
+                                    System.out.println("+---------------------------------------------------------------------------------------------------------------------+");
+                                    System.out.println("|    ID    |                Name                |            Email          |    Phone    |  Gender  |     Salary     |");
+                                    System.out.println("+---------------------------------------------------------------------------------------------------------------------+");
                                     System.out.println(librarianToFind);
+                                    System.out.println("+---------------------------------------------------------------------------------------------------------------------+");
                                 }
                                 break;
                             }
@@ -241,4 +278,5 @@ public class Main_Librarian {
         } while (selection != 7);
 
     }
+
 }

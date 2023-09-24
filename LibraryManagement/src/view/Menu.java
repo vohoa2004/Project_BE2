@@ -35,27 +35,26 @@ public class Menu {
         System.out.println(horizontalLine);
 
     }
-    
-    public static int getChoice(String[] options, String header) {
-    displayMenu(options, header);
 
-    while (true) {
-        System.out.print("Your choice (1-" + options.length + "): ");
-        Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
-        try {
-            int choice = Integer.parseInt(input);
-            if (choice >= 1 && choice <= options.length) {
-                return choice;
-            } else {
-                System.out.println("Invalid choice. Please enter a number between 1 and " + options.length + ".");
+    public static int getChoice(String[] options, String header) {
+        displayMenu(options, header);
+
+        while (true) {
+            System.out.print("Your choice (1-" + options.length + "): ");
+            Scanner sc = new Scanner(System.in);
+            String input = sc.nextLine();
+            try {
+                int choice = Integer.parseInt(input);
+                if (choice >= 1 && choice <= options.length) {
+                    return choice;
+                } else {
+                    System.out.println("Invalid choice. Please enter a number between 1 and " + options.length + ".");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a number.");
             }
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid input. Please enter a number.");
         }
     }
-}
-
 
     private static String repeat(String str, int n) {
         // dung StringBuilder
@@ -65,4 +64,14 @@ public class Menu {
         }
         return result.toString();
     }
+
+    public static String getTableIssueHeader() {
+        return String.format("| %-10s | %-12s | %-12s | %-12s | %-12s | %-12s | %-12s | %-10s | %-10s | %-10s |",
+                "Trans. ID", "Charges", "Issue Date", "Due Date", "Return Date", "Fine", "Reader ID", "Quantity", "Status", "Book ID");
+    }
+
+    public static String getTableIssueFooter() {
+        return "+------------+--------------+--------------+--------------+--------------+--------------+--------------+------------+------------+------------+";
+    }
+
 }

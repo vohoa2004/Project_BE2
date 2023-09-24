@@ -136,13 +136,11 @@ public class IssueBook {
 //        return String.format("|  %-2d  | %-12.2f | %-40s | %-40s | %-40s | %-12.2f | %-26s | %-12d | %-9d | %-15s |",
 //                transactionId, charges, issueDateStr, dueDateStr, returnDateStr, fine, readerId, quantity, statusString);
 //    }
-
     @Override
     public String toString() {
-        return "IssueBook{" + "transactionId=" + transactionId + ", charges=" + charges + ", issueDate=" + issueDate + ", dueDate=" + dueDate + ", returnDate=" + returnDate + ", fine=" + fine + ", readerId=" + readerId + ", quantity=" + quantity + ", borrowing=" + borrowing + ", bookId=" + bookId + '}';
+        String statusString = borrowing ? "Borrowing" : "Returned";
+        return String.format("| %-10d | %-12.2f | %-12s | %-12s | %-12s | %-12.2f | %-12s | %-10d | %-10s | %-10d |",
+                transactionId, charges, issueDate, dueDate, returnDate, fine, readerId, quantity, statusString, bookId);
     }
 
-    
-    
-    
 }
