@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Locale;
 
@@ -16,6 +17,7 @@ public class IssueBook {
     private int quantity;
     private boolean borrowing;
     private int bookId;
+    
 
     public IssueBook() {
     }
@@ -32,6 +34,19 @@ public class IssueBook {
         this.borrowing = borrowing;
         this.bookId = bookId;
     }
+
+    public IssueBook(double charges, LocalDate issueDate, LocalDate dueDate, double fine, String readerId, int quantity, boolean borrowing, int bookId) {
+        this.charges = charges;
+        this.issueDate = issueDate;
+        this.dueDate = dueDate;
+        this.fine = fine;
+        this.readerId = readerId;
+        this.quantity = quantity;
+        this.borrowing = borrowing;
+        this.bookId = bookId;
+    }
+    
+    
 
     public String getReaderId() {
         return readerId;
@@ -117,13 +132,16 @@ public class IssueBook {
         this.bookId = bookId;
     }
 
-    @Override
-    public String toString() {
-        String statusString = borrowing ? "Borrowing" : "Returned";
-        return String.format("|  %-2s  | %-12.0f|%-40L|%-40L| %-40L|%-12.0f| %-26s| %-12.0f|       %-9d| %-15s|",
-                transactionId, charges,issueDate, dueDate, returnDate, fine, readerId, quantity, statusString );
-                
-    }
+  @Override
+public String toString() {
+String statusString = borrowing ? "Borrowing" : "Returned";
+DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+String issueDateString = formatter.format(issueDate);
+String returnDateString = formatter.format(returnDate);
+String dueDateString = formatter.format(dueDate);
+return String.format("|  %-2d  | %-12.0f|%-40s|%-40s| %-40s|%-12.0f| %-26s| %-12d| %-15s|",
+transactionId, charges, issueDate, dueDate, returnDate, fine, readerId, quantity, statusString);
+}
 
     private LocalDate calculateDueDate(LocalDate issueDate, int duration) {
         return issueDate.plusDays(duration);

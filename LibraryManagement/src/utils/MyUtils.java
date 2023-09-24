@@ -1,5 +1,7 @@
 package utils;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -55,6 +57,7 @@ public class MyUtils {
         } while (true);
     }
     
+
     public static Double inputBookDouble(String message, int min){
        Scanner sc = new Scanner(System.in);
        do{
@@ -73,7 +76,8 @@ public class MyUtils {
     }
 
     //regex for username
-    public static final Pattern VALID_READER_ID_REGEX = Pattern.compile("^(L|S)\\d{4}$");
+    public static final Pattern VALID_READER_ID_REGEX = Pattern.compile("^(R)\\d{4}$");
+    public static final Pattern VALID_LIBRARIAN_ID_REGEX = Pattern.compile("^(L)\\d{4}$");
 
     public static final Pattern VALID_USERNAME_REGEX = Pattern.compile("^[a-zA-Z][a-zA-Z0-9]*$");
 
@@ -84,6 +88,11 @@ public class MyUtils {
 
     public static boolean validateReaderId(String id) {
         Matcher matcher = VALID_READER_ID_REGEX.matcher(id);
+        return matcher.matches();
+    }
+    
+    public static boolean validateLibrarianId(String id) {
+        Matcher matcher = VALID_LIBRARIAN_ID_REGEX.matcher(id);
         return matcher.matches();
     }
 
@@ -127,5 +136,45 @@ public class MyUtils {
             System.out.println("Gender must be 'male' or 'female' (case insensitive)!");
         } while (true);
     }
+    
+    public static LocalDate inputLocalDate(String message) {
+        Scanner sc = new Scanner(System.in);
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        do {
+            System.out.print(message);
+            String dateStr = sc.nextLine();
+
+            if (dateStr.trim().isEmpty()) {
+                System.out.println("value must be filled!");
+            } else {
+                try {
+                    LocalDate date = LocalDate.parse(dateStr, dateFormatter);
+                    return date;
+                } catch (java.time.format.DateTimeParseException ex) {
+                    System.out.println("Invalid date format. Please enter date in format 'dd-MM-yyyy'.");
+                }
+            }
+        } while (true);
+    }
+
+
+    // check enter number > 0
+    public static Integer inputPositiveNumber(String message) {
+        Scanner sc = new Scanner(System.in);
+        do {
+            try {
+                System.out.print(message);
+                Integer number = Integer.parseInt(sc.nextLine());
+                if (number > 0) {
+                    return number;
+                }
+                System.out.println("Value need to be >0 ");
+            } catch (NumberFormatException e) {
+                System.out.println("Required number");
+            }
+        } while (true);
+
+    }
 
 }
+

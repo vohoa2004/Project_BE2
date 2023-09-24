@@ -101,7 +101,6 @@ public class ReaderDAO {
                 String phone = resultSet.getString("Phone");
 
                 result = new Reader(readerId, userId, name, email, phone, gender);
-                System.out.println(result.toString());
             }
         } catch (SQLException e) {
             System.out.println("error 1");
