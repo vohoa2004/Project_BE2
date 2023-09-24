@@ -18,12 +18,18 @@ public class UserController {
     }
 
     public User addReaderUser() {
-        String userName = MyUtils.inputString("Input user name: ");
-        while(!MyUtils.validateUsername(userName)) {
+        String userName = MyUtils.inputString("Input username: ");
+        while (!MyUtils.validateUsername(userName) || !isUsernameUnique(userName)) {
+            if (!MyUtils.validateUsername(userName)) {
+                System.out.println("username cannot contains space!");
+            }
+            if (!isUsernameUnique(userName)) {
+                System.out.println("This username is existed!");
+            }
             userName = MyUtils.inputString("Input user name: ");
         }
-                
-        String password = MyUtils.inputString("Input password: ");
+
+        String password = userName.substring(0,3) + "123"; // default password
         User.UserType userType = User.UserType.READER;
 
         User user = new User(userName, password, userType);
@@ -36,14 +42,20 @@ public class UserController {
         }
         return user;
     }
-    
+
     public User addLibrarianUser() {
-        String userName = MyUtils.inputString("Input user name: ");
-        while(!MyUtils.validateUsername(userName)) {
+        String userName = MyUtils.inputString("Input username: ");
+        while (!MyUtils.validateUsername(userName) || !isUsernameUnique(userName)) {
+            if (!MyUtils.validateUsername(userName)) {
+                System.out.println("username cannot contains space!");
+            }
+            if (!isUsernameUnique(userName)) {
+                System.out.println("This username is existed!");
+            }
             userName = MyUtils.inputString("Input user name: ");
         }
-                
-        String password = MyUtils.inputString("Input password: ");
+
+        String password = userName.substring(0, 3) + "456";
         User.UserType userType = User.UserType.LIBRARIAN;
 
         User user = new User(userName, password, userType);
@@ -56,32 +68,58 @@ public class UserController {
         }
         return user;
     }
-    
-    public void updateUser() {      
-    int userIdToUpdate = MyUtils.inputPositiveNumber("Enter the User ID you want to update: ");
-    User userUpdate = userDAO.selectById(userIdToUpdate);
-    
-    if (userUpdate != null) {
-        String newPassword = MyUtils.inputString("Enter your new password: ");
-        userUpdate.setPassword(newPassword);
-        int rowUpdated = userDAO.update(userUpdate, userIdToUpdate);
-        if (rowUpdated == 1) {
-            System.out.println("Password updated successfully with ID: " + userIdToUpdate);
+
+    public void updateUser(User userUpdate) {
+        if (userUpdate != null) {
+            int userIdToUpdate = userUpdate.getUserId();
+            String newPassword = MyUtils.inputString("Enter your new password: ");
+            userUpdate.setPassword(newPassword);
+            int rowUpdated = userDAO.update(userUpdate, userUpdate.getUserId());
+            if (rowUpdated == 1) {
+                System.out.println("Password updated successfully with ID: " + userIdToUpdate);
+            } else {
+                System.out.println("Fail to update password!!!");
+            }
         } else {
-            System.out.println("Fail to update password!!!");
+            System.out.println("User with this ID not found. Please enter again!!");
         }
-    } else {
-        System.out.println("User with ID " + userIdToUpdate + " not found. Please enter again!!");
     }
+
+    public ArrayList<User> getAllUser() {
+        ArrayList<User> users = userDAO.selectAll();
+        return users;
     }
     
-    public ArrayList<User> getAllUser(){
-        ArrayList<User> users = userDAO.selectAll();
+    public void showAllUser() {
+        ArrayList<User> users = getAllUser();
         System.out.println("----User list----");
         for (User user : users) {
             System.out.println(user.toString());
         }
-        return users;
+    }
+
+    public boolean isUsernameUnique(String userName) {
+        boolean result = true;
+        ArrayList<User> users = getAllUser();
+        for (User x : users) {
+            if (x.getUsername().equalsIgnoreCase(userName)) {
+                result = false;
+                break;
+            }
+        }
+        return result;
+
+    }
+    
+    public User getUserByUsername(String userName) {
+        User result = null;
+        ArrayList<User> users = getAllUser();
+        for (User x : users) {
+            if (x.getUsername().equalsIgnoreCase(userName)) {
+                result = x;
+            }
+        }
+        return result;
     }
 
 }

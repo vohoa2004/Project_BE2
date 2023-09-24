@@ -45,8 +45,6 @@ public class IssueBook {
         this.borrowing = borrowing;
         this.bookId = bookId;
     }
-    
-    
 
     public String getReaderId() {
         return readerId;
@@ -55,8 +53,6 @@ public class IssueBook {
     public void setReaderId(String readerId) {
         this.readerId = readerId;
     }
-    
-    
 
     public LocalDate getIssueDate() {
         return issueDate;
@@ -121,8 +117,6 @@ public class IssueBook {
     public void setBorrowing(boolean borrowing) {
         this.borrowing = borrowing;
     }
-    
-    
 
     public int getBookId() {
         return bookId;
@@ -132,27 +126,12 @@ public class IssueBook {
         this.bookId = bookId;
     }
 
-  @Override
-public String toString() {
-String statusString = borrowing ? "Borrowing" : "Returned";
-DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-String issueDateString = formatter.format(issueDate);
-String returnDateString = formatter.format(returnDate);
-String dueDateString = formatter.format(dueDate);
-return String.format("|  %-2d  | %-12.0f|%-40s|%-40s| %-40s|%-12.0f| %-26s| %-12d| %-15s|",
-transactionId, charges, issueDate, dueDate, returnDate, fine, readerId, quantity, statusString);
-}
 
-    private LocalDate calculateDueDate(LocalDate issueDate, int duration) {
-        return issueDate.plusDays(duration);
+    @Override
+    public String toString() {
+        String statusString = borrowing ? "Borrowing" : "Returned";
+        return String.format("| %-10d | %-12.2f | %-12s | %-12s | %-12s | %-12.2f | %-12s | %-10d | %-10s | %-10d |",
+                transactionId, charges, issueDate, dueDate, returnDate, fine, readerId, quantity, statusString, bookId);
     }
 
-    private double calculateFine(LocalDate dueDate) {
-        LocalDate today = LocalDate.now();
-        if (dueDate.isBefore(today)) {
-            long daysLate = ChronoUnit.DAYS.between(dueDate, today);
-            return daysLate * 10000;
-        }
-        return 0;
-    }
 }

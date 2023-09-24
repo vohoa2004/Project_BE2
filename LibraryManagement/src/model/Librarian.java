@@ -100,9 +100,11 @@ public class Librarian {
 
     @Override
     public String toString() {
+
 //       System.out.println("+---------------------------------------------------------------------------------------------------------------------+");
 //       System.out.println("|    ID    |                Name                |            Email          |    Phone    |  Gender  |     Salary     |");
 //       System.out.println("+---------------------------------------------------------------------------------------------------------------------+");
+
          return String.format("|  %-2s   | %-35s| %-26s| %-12s| %-9s|%-16.0f|",
                  librarianId, name, email, phone, gender, salary);           
     }

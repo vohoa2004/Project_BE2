@@ -70,19 +70,41 @@ public class LibrarianController {
             librarian.setPhone(newPhone);
         }
 
-        System.out.print("Enter new salary (press Enter to keep current salary): ");
-        String newSalaryStr = scanner.nextLine().trim();
-        if (!newSalaryStr.isEmpty()) {
-            try {
-                double newSalary = Double.parseDouble(newSalaryStr);
-                librarian.setSalary(newSalary);
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid salary format. Keeping current salary.");
-            }
-        }
-
+//        System.out.print("Enter new salary (press Enter to keep current salary): ");
+//        String newSalaryStr = scanner.nextLine().trim();
+//        if (!newSalaryStr.isEmpty()) {
+//            try {
+//                double newSalary = Double.parseDouble(newSalaryStr);
+//                librarian.setSalary(newSalary);
+//            } catch (NumberFormatException e) {
+//                System.out.println("Invalid salary format. Keeping current salary.");
+//            }
+//        }
         librarianDAO.update(librarian);
         System.out.println("Librarian information updated successfully!");
+    }
+
+    public void updateLibrarianByHeadLibrarian(String librarianId) {
+        if (librarianId.equals("L0001")) {
+            System.out.println("Hey! You cannot change your salary!");
+        } else {
+            Librarian librarian = searchLibrarian(librarianId);
+            Scanner scanner = new Scanner(System.in);
+
+            System.out.print("Enter new salary for this librarian (press Enter to keep current salary): ");
+            String newSalaryStr = scanner.nextLine().trim();
+            if (!newSalaryStr.isEmpty()) {
+                try {
+                    double newSalary = Double.parseDouble(newSalaryStr);
+                    librarian.setSalary(newSalary);
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid salary format. Keeping current salary.");
+                }
+            }
+
+            librarianDAO.update(librarian);
+            System.out.println("Librarian information updated successfully!");
+        }
     }
 
     public ArrayList<Librarian> getAllLibrarians() {
@@ -91,6 +113,11 @@ public class LibrarianController {
         for (Librarian librarian : librarians) {
             System.out.println(librarian.toString());
         }
+        return librarians;
+    }
+
+    public ArrayList<Librarian> findAllLibrarians() {
+        ArrayList<Librarian> librarians = librarianDAO.selectAll();
         return librarians;
     }
 
@@ -109,4 +136,16 @@ public class LibrarianController {
 
     }
 
+
+    public Librarian getLibrarianByUserId(int userId) {
+        ArrayList<Librarian> librarians = findAllLibrarians();
+        for (Librarian x : librarians) {
+            if (x.getUserId() == userId) {
+                return x;
+            }
+        }
+        return null;
+    }
+
 }
+

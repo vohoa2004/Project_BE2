@@ -83,4 +83,8 @@ public class ReaderController {
         }
     }
     
+    public Reader getReaderByUserId(int userId) {
+        return readerDAO.selectByUserId(userId);
+    }
+    
 }
