@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import model.Book;
 import model.IssueBook;
 import utils.MyUtils;
+import view.Menu;
 
 /**
  *
@@ -117,6 +118,7 @@ public class IssueBookController {
                 if (result > 0) {
                     bookController.update(book, book.getTotalAvailable() + issuebook.getQuantity());
                     System.out.println("Return book successfully!");
+                    System.out.println(Menu.getTableIssueHeader());
                     System.out.println(searchIssueById(issueId));
                 } else {
                     System.out.println("Failed to return book");
