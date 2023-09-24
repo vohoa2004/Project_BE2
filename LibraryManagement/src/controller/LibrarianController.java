@@ -61,12 +61,18 @@ public class LibrarianController {
         System.out.print("Enter new email (press Enter to keep current email): ");
         String newEmail = scanner.nextLine().trim();
         if (!newEmail.isEmpty()) {
+            while (!MyUtils.validateEmail(newEmail)) {
+                newEmail = MyUtils.inputString("Invalid format. Re-Input email: ");
+            }
             librarian.setEmail(newEmail);
         }
 
         System.out.print("Enter new phone (press Enter to keep current phone): ");
         String newPhone = scanner.nextLine().trim();
         if (!newPhone.isEmpty()) {
+            while (!MyUtils.validatePhone(newPhone)) {
+                newPhone = MyUtils.inputString("Invalid format. Re-input phone number: ");
+            }
             librarian.setPhone(newPhone);
         }
 

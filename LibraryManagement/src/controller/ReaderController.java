@@ -51,18 +51,24 @@ public class ReaderController {
         }
         System.out.print("Enter new email (press Enter to keep current email): ");
         String newEmail = scanner.nextLine().trim();
+
         if (!newEmail.isEmpty()) {
+            while (!MyUtils.validateEmail(newEmail)) {
+                newEmail = MyUtils.inputString("Invalid format. Re-Input email: ");
+            }
             reader.setEmail(newEmail);
         }
         System.out.print("Enter new phone (press Enter to keep current phone): ");
         String newPhone = scanner.nextLine().trim();
         if (!newPhone.isEmpty()) {
+            while (!MyUtils.validatePhone(newPhone)) {
+                newPhone = MyUtils.inputString("Invalid format. Re-input phone number: ");
+            }
             reader.setPhone(newPhone);
-        }
-        if(readerDAO.update(reader) > 0) {
+        } 
+        if (readerDAO.update(reader) > 0) {
             System.out.println("Updated successfully!");
-        }
-        else {
+        } else {
             System.out.println("Cannot update this reader!");
         };
     }
@@ -75,16 +81,16 @@ public class ReaderController {
     public ArrayList<Reader> getAllReaders() {
         return readerDAO.selectAll();
     }
-    
+
     public void showAllReaders() {
         ArrayList<Reader> list = getAllReaders();
         for (Reader x : list) {
             System.out.println(x);
         }
     }
-    
+
     public Reader getReaderByUserId(int userId) {
         return readerDAO.selectByUserId(userId);
     }
-    
+
 }

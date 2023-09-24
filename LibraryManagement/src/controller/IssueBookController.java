@@ -122,7 +122,9 @@ public class IssueBookController {
                 if (result > 0) {
                     bookController.update(book, book.getTotalAvailable() + issuebook.getQuantity());
                     System.out.println("Return book successfully!");
+                    Menu.getTableIssueHeader();
                     System.out.println(searchIssueById(issueId));
+                    Menu.getTableIssueFooter();
                 } else {
                     System.out.println("Failed to return book");
                 }

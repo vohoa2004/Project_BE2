@@ -68,8 +68,9 @@ public class Main_Reader {
                     System.out.println("|  ID  |                 Title                   |           Author          |    Price    |    Category    | TotalAvailable | BorrowDuration |");
                     System.out.println("+---------------------------------------------------------------------------------------------------------------------------------------------+");
                     ArrayList<Book> list = bookController.getBookByAuthor(name);
-                    System.out.println("+---------------------------------------------------------------------------------------------------------------------------------------------+");
                     bookController.showList(list);
+                    System.out.println("+---------------------------------------------------------------------------------------------------------------------------------------------+");
+
                     break;
                 }
                 case 5: {
@@ -87,18 +88,22 @@ public class Main_Reader {
                         System.out.println("You haven't made any issue book transactions!");
                     } else {
                         int id = MyUtils.inputInteger("Enter transaction id you want to return book: ", 1, Integer.MAX_VALUE);
-                        if (issueBookController.searchIssueById(id).getReaderId().equals(reader.getReaderId())) {
-                            issueBookController.returnIssueBook(id);
+                        if (issueBookController.searchIssueById(id) == null) {
+                            System.out.println("This transaction is not existed!");
                         } else {
-                            System.out.println("This transaction is not yours!");
+                            if (issueBookController.searchIssueById(id).getReaderId().equals(reader.getReaderId())) {
+                                issueBookController.returnIssueBook(id);
+                            } else {
+                                System.out.println("This transaction is not yours!");
+                            }
                         }
                     }
                     break;
                 }
                 case 8: {
                     // LOGOUT
-                    System.out.println("Bye Bye!");
-                    System.exit(0);
+                    System.out.println("Logout successfully!");
+                    return;
                 }
             }
 

@@ -41,9 +41,9 @@ public class Main_Librarian {
 
                     if (librarian != null) {
                         System.out.println("+---------------------------------------------------------------------------------------------------------------------+");
-                        System.out.println("|    ID    |                Name                |            Email          |    Phone    |  Gender  |     Salary     |");
+                        System.out.println("|Reader ID |                Name                |            Email          |    Phone    |  Gender  |     Salary     |");
                         System.out.println("+---------------------------------------------------------------------------------------------------------------------+");
-                        System.out.println(librarian);
+                        System.out.println(librarianController.getLibrarianByUserId(user.getUserId()));
                         System.out.println("+---------------------------------------------------------------------------------------------------------------------+");
                     } else {
                         System.out.println("Not found your information!");
@@ -58,6 +58,7 @@ public class Main_Librarian {
                         }
                         System.out.println("Update other information: ");
                         librarianController.updateLibrarian(librarian.getLibrarianId());
+
                     } else {
                         System.out.println("Not found your information!");
                     }
@@ -68,52 +69,58 @@ public class Main_Librarian {
                     String header2a = "BOOK";
                     String[] options2a = {"Add new book",
                         "Find book by title", "Find book by author",
-                        "Update book information", "Show book list"};
+                        "Update book information", "Show book list", "Back to Main Menu"};
                     int option;
-                    //do {
-                    option = Menu.getChoice(options2a, header2a);
-                    switch (option) {
-                        case 1: {
-                            bookController.addBook();
-                            break;
-                        }
-                        case 2: {
-                            String name = MyUtils.inputString("Enter book title: ");
+                    do {
+                        option = Menu.getChoice(options2a, header2a);
+                        switch (option) {
+                            case 1: {
+                                bookController.addBook();
+                                break;
+                            }
+                            case 2: {
+                                String name = MyUtils.inputString("Enter book title: ");
 
-                            ArrayList<Book> list = bookController.getBookByName(name);
-                            System.out.println("+---------------------------------------------------------------------------------------------------------------------------------------------+");
-                            System.out.println("|  ID  |                 Title                   |           Author          |    Price    |    Category    | TotalAvailable | BorrowDuration |");
-                            System.out.println("+---------------------------------------------------------------------------------------------------------------------------------------------+");
-                            bookController.showList(list);
-                            System.out.println("+---------------------------------------------------------------------------------------------------------------------------------------------+");
-                            break;
-                        }
-                        case 3: {
-                            String name = MyUtils.inputString("Enter book author: ");
-                            ArrayList<Book> list = bookController.getBookByAuthor(name);
-                            System.out.println("+---------------------------------------------------------------------------------------------------------------------------------------------+");
-                            System.out.println("|  ID  |                 Title                   |           Author          |    Price    |    Category    | TotalAvailable | BorrowDuration |");
-                            System.out.println("+---------------------------------------------------------------------------------------------------------------------------------------------+");
-                            bookController.showList(list);
-                            System.out.println("+---------------------------------------------------------------------------------------------------------------------------------------------+");
-                            break;
-                        }
-                        case 4: {
-                            int id = MyUtils.inputInteger("Enter book id: ", 1, Integer.MAX_VALUE);
-                            Book book = bookController.getBookById(id);
-                            bookController.updateBook(book);
-                            break;
-                        }
-                        case 5: {
-                            ArrayList<Book> books = bookController.getAllBook();
-                            System.out.println("+---------------------------------------------------------------------------------------------------------------------------------------------+");
-                            System.out.println("|  ID  |                 Title                   |           Author          |    Price    |    Category    | TotalAvailable | BorrowDuration |");
-                            System.out.println("+---------------------------------------------------------------------------------------------------------------------------------------------+");
-                            bookController.showList(books);
-                            System.out.println("+---------------------------------------------------------------------------------------------------------------------------------------------+");
-                        }
+                                ArrayList<Book> list = bookController.getBookByName(name);
+                                System.out.println("+---------------------------------------------------------------------------------------------------------------------------------------------+");
+                                System.out.println("|  ID  |                 Title                   |           Author          |    Price    |    Category    | TotalAvailable | BorrowDuration |");
+                                System.out.println("+---------------------------------------------------------------------------------------------------------------------------------------------+");
+                                bookController.showList(list);
+                                System.out.println("+---------------------------------------------------------------------------------------------------------------------------------------------+");
+                                break;
+                            }
+                            case 3: {
+                                String name = MyUtils.inputString("Enter book author: ");
+                                ArrayList<Book> list = bookController.getBookByAuthor(name);
+                                System.out.println("+---------------------------------------------------------------------------------------------------------------------------------------------+");
+                                System.out.println("|  ID  |                 Title                   |           Author          |    Price    |    Category    | TotalAvailable | BorrowDuration |");
+                                System.out.println("+---------------------------------------------------------------------------------------------------------------------------------------------+");
+                                bookController.showList(list);
+                                System.out.println("+---------------------------------------------------------------------------------------------------------------------------------------------+");
+                                break;
+                            }
+                            case 4: {
+                                int id = MyUtils.inputInteger("Enter book id: ", 1, Integer.MAX_VALUE);
+                                Book book = bookController.getBookById(id);
+                                bookController.updateBook(book);
+                                break;
+                            }
+                            case 5: {
+                                ArrayList<Book> books = bookController.getAllBook();
+                                System.out.println("+---------------------------------------------------------------------------------------------------------------------------------------------+");
+                                System.out.println("|  ID  |                 Title                   |           Author          |    Price    |    Category    | TotalAvailable | BorrowDuration |");
+                                System.out.println("+---------------------------------------------------------------------------------------------------------------------------------------------+");
+                                bookController.showList(books);
+                                System.out.println("+---------------------------------------------------------------------------------------------------------------------------------------------+");
+                                break;
+                            }
+                            case 6: {
+                                option = 0;
+                                break;
+                            }
 
-                    }
+                        }
+                    } while (option != 0);
                     break;
                 }
                 case 4: {
@@ -121,37 +128,52 @@ public class Main_Librarian {
                     String header2a = "READER";
                     String[] options2a = {"Add new reader user",
                         "Search reader by reader id",
-                        "Show reader list"};
+                        "Show reader list", "Back to Main Menu"};
                     int option;
-                    //do {
-                    option = Menu.getChoice(options2a, header2a);
-                    switch (option) {
-                        case 1: {
-                            //reader den thu vien dang ky tai khoan, thu thu tao tai khoan cho reader, voi mat khau default
-                            User newUser = userController.addReaderUser();
-                            readerController.addReader(newUser.getUserId());
-                            break;
-                        }
-                        case 2: {
-                            String id = MyUtils.inputString("Enter reader id: ");
-                            Reader reader = readerController.getReaderById(id);
-                            System.out.println(reader);
-                            break;
-                        }
-                        case 3: {
-
-                            ArrayList<Reader> list = readerController.getAllReaders();
-                            System.out.println("+--------------------------------------------------------------------------------------------------------------+");
-                            System.out.println("|    ID    | User ID |                Name                |            Email          |    Phone    |  Gender  |");
-                            System.out.println("+--------------------------------------------------------------------------------------------------------------+");
-                            for (Reader x : list) {
-                                System.out.println(x.toString());
+                    do {
+                        option = Menu.getChoice(options2a, header2a);
+                        switch (option) {
+                            case 1: {
+                                //reader den thu vien dang ky tai khoan, thu thu tao tai khoan cho reader, voi mat khau default
+                                User newUser = userController.addReaderUser();
+                                readerController.addReader(newUser.getUserId());
+                                break;
                             }
-                            System.out.println("+--------------------------------------------------------------------------------------------------------------+");
-                            break;
-                        }
+                            case 2: {
+                                String id = MyUtils.inputString("Enter reader id: ");
 
-                    }
+                                Reader reader = readerController.getReaderById(id);
+                                if (reader!= null){
+                                System.out.println("+--------------------------------------------------------------------------------------------------------------+");
+                                System.out.println("|Reader ID | User ID |                Name                |            Email          |    Phone    |  Gender  |");
+                                System.out.println("+--------------------------------------------------------------------------------------------------------------+");
+                                System.out.println(reader);
+                                System.out.println("+--------------------------------------------------------------------------------------------------------------+");
+                                }
+                                else{
+                                    System.out.println("Not found this reader!");
+                                }
+                                 break;
+                            }
+                            case 3: {
+
+                                ArrayList<Reader> list = readerController.getAllReaders();
+                                System.out.println("+--------------------------------------------------------------------------------------------------------------+");
+                                System.out.println("|Reader ID | User ID |                Name                |            Email          |    Phone    |  Gender  |");
+                                System.out.println("+--------------------------------------------------------------------------------------------------------------+");
+                                for (Reader x : list) {
+                                    System.out.println(x.toString());
+                                }
+                                System.out.println("+--------------------------------------------------------------------------------------------------------------+");
+                                break;
+                            }
+                            case 4: {
+                                option = 0;
+                                break;
+                            }
+
+                        }
+                    } while (option != 0);
                     break;
                 }
                 case 5: {
@@ -159,50 +181,59 @@ public class Main_Librarian {
                     String header2a = "ISSUE TRANSACTION";
                     String[] options2a = {"Create issue book transaction",
                         "See all issue book transaction", "Search issue book transaction by reader id",
-                        "Return book for a reader"};
+                        "Return book for a reader", "Back to Main Menu"};
                     int option;
-                    //do {
-                    option = Menu.getChoice(options2a, header2a);
-                    switch (option) {
-                        case 1: {
-                            int bookId = MyUtils.inputInteger("Enter book ID: ", 1, Integer.MAX_VALUE);
-                            String readerId = MyUtils.inputString("Enter reader id: ");
-                            issueBookController.addNewIssueTransaction(bookId, readerId);
-                            break;
-                        }
-                        case 2: {
-                            System.out.println(Menu.getTableIssueFooter());
-                            System.out.println(Menu.getTableIssueHeader());
-                            System.out.println(Menu.getTableIssueFooter());
-                            issueBookController.showAllIssueBookTransaction();
-                            System.out.println(Menu.getTableIssueFooter());
-                            break;
-                        }
-                        case 3: {
-                            String readerId = MyUtils.inputString("Enter reader id: ");
-                            ArrayList<IssueBook> list = issueBookController.searchIssueTransactionByReaderId(readerId);
-                            if (list.isEmpty()) {
-                                System.out.println("This reader hasn't made any transactions!");
-                            } else {
+                    do {
+                        option = Menu.getChoice(options2a, header2a);
+                        switch (option) {
+                            case 1: {
+                                int bookId = MyUtils.inputInteger("Enter book ID: ", 1, Integer.MAX_VALUE);
+                                String readerId = MyUtils.inputString("Enter reader id: ");
+                                issueBookController.addNewIssueTransaction(bookId, readerId);
+                                break;
+                            }
+                            case 2: {
                                 System.out.println(Menu.getTableIssueFooter());
                                 System.out.println(Menu.getTableIssueHeader());
                                 System.out.println(Menu.getTableIssueFooter());
-                                for (IssueBook i : list) {
-                                    System.out.println(i.toString());
-                                }
+                                issueBookController.showAllIssueBookTransaction();
                                 System.out.println(Menu.getTableIssueFooter());
+                                break;
+                            }
+                            case 3: {
+                                String readerId = MyUtils.inputString("Enter reader id: ");
+                                ArrayList<IssueBook> list = issueBookController.searchIssueTransactionByReaderId(readerId);
+                                if (list.isEmpty()) {
+                                    System.out.println("This reader hasn't made any transactions!");
+                                } else {
+                                    System.out.println(Menu.getTableIssueFooter());
+                                    System.out.println(Menu.getTableIssueHeader());
+                                    System.out.println(Menu.getTableIssueFooter());
+                                    for (IssueBook i : list) {
+                                        System.out.println(i.toString());
+                                    }
+                                    System.out.println(Menu.getTableIssueFooter());
+                                }
+
+                                break;
+                            }
+                            case 4: {
+                                int id = MyUtils.inputInteger("Enter transaction id: ", 1, Integer.MAX_VALUE);
+                                if (issueBookController.searchIssueById(id) == null) {
+                                    System.out.println("This transaction is not existed!");
+                                } else {
+                                    issueBookController.returnIssueBook(id);
+                                }
+                                break;
+
+                            }
+                            case 5: {
+                                option = 0;
+                                break;
                             }
 
-                            break;
                         }
-                        case 4: {
-                            int id = MyUtils.inputInteger("Enter transaction id: ", 1, Integer.MAX_VALUE);
-                            issueBookController.returnIssueBook(id);
-                            break;
-
-                        }
-
-                    }
+                    } while (option != 0);
                     break;
                 }
                 case 6: {
@@ -213,65 +244,74 @@ public class Main_Librarian {
                         String header2a = "MANAGE OTHER LIBRARIAN";
                         String[] options2a = {"Add new librarian", "See list of all librarians",
                             "Search librarian by librarian id",
-                            "Update salary for a librarian"};
+                            "Update salary for a librarian", "Back to Main Menu"};
                         int option;
-                        option = Menu.getChoice(options2a, header2a);
-                        switch (option) {
-                            case 1: {
-                                User newUser = userController.addLibrarianUser();
-                                librarianController.addLibrarian(newUser.getUserId());
-                                break;
-                            }
-                            case 2: {
-                                ArrayList<Librarian> list = librarianController.findAllLibrarians();
-                                if (!list.isEmpty()) {
-                                    System.out.println("+---------------------------------------------------------------------------------------------------------------------+");
-                                    System.out.println("|    ID    |                Name                |            Email          |    Phone    |  Gender  |     Salary     |");
-                                    System.out.println("+---------------------------------------------------------------------------------------------------------------------+");
-                                    for (Librarian x : list) {
-                                        System.out.println(x.toString());
+                        do {
+                            option = Menu.getChoice(options2a, header2a);
+                            switch (option) {
+                                case 1: {
+                                    User newUser = userController.addLibrarianUser();
+                                    librarianController.addLibrarian(newUser.getUserId());
+                                    break;
+                                }
+                                case 2: {
+                                    ArrayList<Librarian> list = librarianController.findAllLibrarians();
+                                    if (!list.isEmpty()) {
+                                        System.out.println("+---------------------------------------------------------------------------------------------------------------------+");
+                                        System.out.println("|    ID    |                Name                |            Email          |    Phone    |  Gender  |     Salary     |");
+                                        System.out.println("+---------------------------------------------------------------------------------------------------------------------+");
+                                        for (Librarian x : list) {
+                                            System.out.println(x.toString());
+                                        }
+                                        System.out.println("+---------------------------------------------------------------------------------------------------------------------+");
+                                    } else {
+                                        System.out.println("There is no librarian!");
                                     }
-                                    System.out.println("+---------------------------------------------------------------------------------------------------------------------+");
-                                } else {
-                                    System.out.println("There is no librarian!");
+                                    break;
                                 }
-                                break;
-                            }
-                            case 3: {
-                                String id = MyUtils.inputString("Enter librarian id: ");
-                                Librarian librarianToFind = librarianController.searchLibrarian(id);
-                                if (librarianToFind == null) {
-                                    System.out.println("This librarian is not exist!");
-                                } else {
-                                    System.out.println("Found the librarian!");
-                                    System.out.println("+---------------------------------------------------------------------------------------------------------------------+");
-                                    System.out.println("|    ID    |                Name                |            Email          |    Phone    |  Gender  |     Salary     |");
-                                    System.out.println("+---------------------------------------------------------------------------------------------------------------------+");
-                                    System.out.println(librarianToFind);
-                                    System.out.println("+---------------------------------------------------------------------------------------------------------------------+");
+                                case 3: {
+                                    String id = MyUtils.inputString("Enter librarian id: ");
+                                    Librarian librarianToFind = librarianController.searchLibrarian(id);
+                                    if (librarianToFind == null) {
+                                        System.out.println("This librarian is not exist!");
+                                    } else {
+                                        System.out.println("Found the librarian!");
+                                        System.out.println("+---------------------------------------------------------------------------------------------------------------------+");
+                                        System.out.println("|    ID    |                Name                |            Email          |    Phone    |  Gender  |     Salary     |");
+                                        System.out.println("+---------------------------------------------------------------------------------------------------------------------+");
+                                        System.out.println(librarianToFind);
+                                        System.out.println("+---------------------------------------------------------------------------------------------------------------------+");
+                                    }
+                                    break;
                                 }
-                                break;
-                            }
-                            case 4: {
-                                String id = MyUtils.inputString("Enter librarian id: ");
-                                Librarian librarianToFind = librarianController.searchLibrarian(id);
-                                if (librarianToFind == null) {
-                                    System.out.println("This librarian is not exist!");
-                                } else {
-                                    System.out.println("Found the librarian!");
-                                    System.out.println(librarianToFind);
-                                    librarianController.updateLibrarianByHeadLibrarian(id);
+                                case 4: {
+                                    String id = MyUtils.inputString("Enter librarian id: ");
+                                    Librarian librarianToFind = librarianController.searchLibrarian(id);
+                                    if (librarianToFind == null) {
+                                        System.out.println("This librarian is not exist!");
+                                    } else {
+                                        System.out.println("Found the librarian!");
+                                        System.out.println(librarianToFind);
+                                        librarianController.updateLibrarianByHeadLibrarian(id);
+                                    }
+                                    break;
                                 }
-                                break;
+                                case 5: {
+                                    option = 0;
+                                    break;
+                                }
                             }
-                        }
+                        } while (option != 0);
                     }
                     break;
 
                 }
+                case 0: {
+                    break;
+                }
                 case 7: {
-                    System.out.println("Bye Bye!");
-                    System.exit(0);
+                    System.out.println("Logout successfully!");
+                    return;
                 }
             }
 
