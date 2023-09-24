@@ -38,7 +38,7 @@ public class Main_Reader {
                     System.out.println("+--------------------------------------------------------------------------------------------------------------+");
                     System.out.println("|    ID    | User ID |                Name                |            Email          |    Phone    |  Gender  |");
                     System.out.println("+--------------------------------------------------------------------------------------------------------------+");
-                    System.out.println(reader);
+                    System.out.println(readerController.getReaderByUserId(user.getUserId()));
                     System.out.println("+--------------------------------------------------------------------------------------------------------------+");
                     break;
                 }
@@ -79,17 +79,19 @@ public class Main_Reader {
                     break;
                 }
                 case 6: {
-                    System.out.println(Menu.getTableIssueFooter());
-                    System.out.println(Menu.getTableIssueHeader());
-                    System.out.println(Menu.getTableIssueFooter());
                     issueBookController.showIssueTransactionByReaderId(reader.getReaderId());
-                    System.out.println(Menu.getTableIssueFooter());
                     break;
                 }
                 case 7: {
-                    int id = MyUtils.inputInteger("Enter transaction id you want to return book: ", 1, Integer.MAX_VALUE);
-                    if (issueBookController.searchIssueById(id).getReaderId().equals(reader.getReaderId())) {
-                        issueBookController.returnIssueBook(id);
+                    if (issueBookController.searchIssueTransactionByReaderId(reader.getReaderId()).isEmpty()) {
+                        System.out.println("You haven't made any issue book transactions!");
+                    } else {
+                        int id = MyUtils.inputInteger("Enter transaction id you want to return book: ", 1, Integer.MAX_VALUE);
+                        if (issueBookController.searchIssueById(id).getReaderId().equals(reader.getReaderId())) {
+                            issueBookController.returnIssueBook(id);
+                        } else {
+                            System.out.println("This transaction is not yours!");
+                        }
                     }
                     break;
                 }

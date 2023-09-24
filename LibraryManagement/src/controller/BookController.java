@@ -16,7 +16,6 @@ import utils.MyUtils;
  * @author vothimaihoa
  */
 public class BookController {
-
     private final BookDAO bookDAO;
 
     public BookController() {

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import model.Book;
 import model.IssueBook;
 import utils.MyUtils;
+import view.Menu;
 
 /**
  *
@@ -90,9 +91,13 @@ public class IssueBookController {
         if (list.isEmpty()) {
             System.out.println("The list is empty!");
         } else {
+            System.out.println(Menu.getTableIssueFooter());
+            System.out.println(Menu.getTableIssueHeader());
+            System.out.println(Menu.getTableIssueFooter());
             for (IssueBook x : list) {
                 System.out.println(x.toString());
             }
+            System.out.println(Menu.getTableIssueFooter());
         }
     }
 
