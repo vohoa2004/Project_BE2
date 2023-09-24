@@ -16,6 +16,7 @@ import view.Menu;
 public class IssueBookController {
 
     private BookController bookController = new BookController();
+    private ReaderController readerController = new ReaderController();
 
     private final IssueBookDAO issueDAO;
 
@@ -26,25 +27,31 @@ public class IssueBookController {
     // for librarian
     public void addNewIssueTransaction(int bookId, String readerId) {
         Book book = bookController.getBookById(bookId);
-        int availableQuantity = book.getTotalAvailable();
-
-        if (availableQuantity <= 0) {
-            System.out.println("Sorry! This book is currently not available for borrowing.");
-            return;
+        if (book == null) {
+            System.out.println("Not found this book!");
+        } else if (readerController.getReaderById(readerId) == null) {
+            System.out.println("Not found this reader!");
         } else {
-            int quantity = MyUtils.inputInteger("Input quantity: ", 1, availableQuantity);
+            int availableQuantity = book.getTotalAvailable();
 
-            double charges = book.getPrice() * 0.06 * quantity;
-            LocalDate issueDate = LocalDate.now();
-            LocalDate dueDate = LocalDate.now().plusDays(book.getBorrowDuration());
-            double fines = 0;
-            boolean status = true;
+            if (availableQuantity <= 0) {
+                System.out.println("Sorry! This book is currently not available for borrowing.");
+                return;
+            } else {
+                int quantity = MyUtils.inputInteger("Input quantity: ", 1, availableQuantity);
 
-            IssueBook newIssueBook = new IssueBook(charges, issueDate, dueDate, fines, readerId, quantity, status, bookId);
+                double charges = book.getPrice() * 0.06 * quantity;
+                LocalDate issueDate = LocalDate.now();
+                LocalDate dueDate = LocalDate.now().plusDays(book.getBorrowDuration());
+                double fines = 0;
+                boolean status = true;
 
-            bookController.update(book, availableQuantity - quantity);
-            issueDAO.insert(newIssueBook);
+                IssueBook newIssueBook = new IssueBook(charges, issueDate, dueDate, fines, readerId, quantity, status, bookId);
 
+                bookController.update(book, availableQuantity - quantity);
+                issueDAO.insert(newIssueBook);
+
+            }
         }
     }
 
