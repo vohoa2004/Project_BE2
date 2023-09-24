@@ -30,7 +30,7 @@
 //        // test issue book
 //         //add new issue book
 ////        issueBookController.addNewIssueTransaction(1, "R0004");
-//        //test tr·∫£ s√°ch
+//        //test tr? s·ch
 ////        issueBookController.returnIssueBook(2);
 //        //test reader
 ////        readerController.showAllReaders();
@@ -51,7 +51,7 @@
 ////            System.out.println(book.toString());
 ////        }
 ////
-////        //C·∫≠p nh·∫≠t th√¥ng tin s√°ch
+////        //C?p nh?t thÙng tin s·ch
 ////        Integer id = MyUtils.inputInteger("input id of book to update: ", 1, Integer.MAX_VALUE);
 ////        Book newBook = bookController.getBookById(id);
 ////
@@ -66,7 +66,7 @@
 ////            System.out.println("Reader not found with the specified ID.");
 ////        }
 //
-//        // test c√°c h√†m c·ªßa ch·ªã Ti√™n
+//        // test c·c h‡m c?a ch? TiÍn
 ////        User user1 = userController.addLibrarianUser();
 ////        librarianController.addLibrarian(user1.getUserId());
 ////        //test showAllUser

@@ -16,29 +16,29 @@ public class TestJDBCUtil {
     public static void main(String[] args) {
 
         try {
-            // Bước 1: Tạo kết nối
+            // B??c 1: T?o k?t n?i
             Connection connection = JDBCUtil.getConnection();
 
             JDBCUtil.printInfo(connection);
 
-            // Bước 2: Tạo ra đối tượng statement
+            // B??c 2: T?o ra ??i t??ng statement
             Statement st = connection.createStatement();
 
-            // Bước 3: Thực thi một câu lệnh SQL
+            // B??c 3: Th?c thi m?t c�u l?nh SQL
             String sql = "INSERT INTO user(Id, UserName, PassWord, UserType)"
                     + "VALUES (10, 'Hoa Vo', 'vohoa@gmail.com', 'READER')";
 
             int check = st.executeUpdate(sql);
 
-            // Bước 4: xử lý kết quả 
-            System.out.println("Số dòng thay đổi: " + check);
+            // B??c 4: x? l� k?t qu? 
+            System.out.println("S? d�ng thay ??i: " + check);
             if (check > 0) {
-                System.out.println("Thêm dữ liệu thành công!");
+                System.out.println("Th�m d? li?u th�nh c�ng!");
             } else {
-                System.out.println("Thêm dữ liệu thất bại!");
+                System.out.println("Th�m d? li?u th?t b?i!");
             }
 
-            // Bước 5: ngắt kết nối
+            // B??c 5: ng?t k?t n?i
             JDBCUtil.closeConnection(connection);
         } catch (SQLException e) {
             e.printStackTrace();

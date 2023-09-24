@@ -130,9 +130,9 @@ public class MyUtils {
         Scanner sc = new Scanner(System.in);
         do {
             System.out.println(message);
-            String gender = sc.nextLine().trim(); // Loại bỏ khoảng trắng ở đầu và cuối chuỗi
+            String gender = sc.nextLine().trim(); // Lo?i b? kho?ng tr?ng ? ??u v� cu?i chu?i
             if (gender.equalsIgnoreCase("male") || gender.equalsIgnoreCase("female")) {
-                return gender.toLowerCase(); // Trả về giới tính ở dạng chữ thường
+                return gender.toLowerCase(); // Tr? v? gi?i t�nh ? d?ng ch? th??ng
             }
             System.out.println("Gender must be 'male' or 'female' (case insensitive)!");
         } while (true);
@@ -182,4 +182,3 @@ public class MyUtils {
     }
 
 }
-

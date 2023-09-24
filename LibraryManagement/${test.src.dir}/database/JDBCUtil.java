@@ -26,15 +26,15 @@ public class JDBCUtil {
                 Logger.getLogger(JDBCUtil.class.getName()).log(Level.SEVERE, null, ex);
             }
             Driver driver = new Driver();
-            // Đăng ký MySQL Driver với DriverManager
+            // ??ng k� MySQL Driver v?i DriverManager
             DriverManager.registerDriver(driver);
 
-            // Các thông số
+            // C�c th�ng s?
             String url = "jdbc:mySQL://localhost:3306/librarymanagement";
             String username = "root";
-            String password = "12345";
+            String password = "tien3101";
 
-            // Tạo kết nối
+            // T?o k?t n?i
             c = DriverManager.getConnection(url, username, password);
 
         } catch (SQLException e) {
