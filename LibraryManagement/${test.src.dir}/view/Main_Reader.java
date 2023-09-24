@@ -78,8 +78,8 @@ public class Main_Reader {
                 }
                 case 8: {
                     // LOGOUT
-                    System.out.println("Bye Bye!");
-                    System.exit(0);
+                    System.out.println("Logout successfully!");
+                    return;
 
                 }
             }
